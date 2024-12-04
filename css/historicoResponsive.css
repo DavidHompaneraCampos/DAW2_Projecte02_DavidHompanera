@@ -1,0 +1,69 @@
+/* Ajuste de tabla para dispositivos pequeños */
+#reservas_table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+/* Ajustes para pantallas medianas y pequeñas */
+@media (max-width: 768px) {
+    #container_header {
+        flex-direction: column;
+        align-items: center;
+        padding: 0.5rem;
+    }
+
+    #icon_profile_header img {
+        width: 70px;
+    }
+
+    #title_header {
+        font-size: 1.8rem;
+    }
+
+    #p_username_profile {
+        font-size: 1.2rem;
+    }
+
+    .btn_custom_logOut {
+        font-size: 0.9rem;
+        padding: 0.4rem;
+    }
+
+    /* Tamaño de fuente reducido para el título */
+    #headerTituloFiltros h2 {
+        font-size: 1.2rem;
+    }
+
+    #headerTituloFiltros {
+        margin-bottom: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    #container_header {
+        padding: 0.3rem;
+    }
+
+    #icon_profile_header img {
+        width: 50px;
+    }
+
+    #title_header {
+        font-size: 1.5rem;
+    }
+
+    #p_username_profile {
+        font-size: 1rem;
+    }
+
+    .btn_custom_logOut {
+        font-size: 0.8rem;
+        padding: 0.3rem 0.6rem;
+    }
+
+    /* Oculta subtítulos en dispositivos muy pequeños */
+    .span_subtitle {
+        display: none;
+    }
+}

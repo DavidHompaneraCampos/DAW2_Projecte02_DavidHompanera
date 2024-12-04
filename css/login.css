@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
+
+/* Estilo para centrar la página en dos columnas */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    min-height: 100vh;
+    font-family: "Lexend", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 200;
+    font-style: normal;
+}
+
+/* Contenedor principal dividido en dos */
+.split-container {
+    display: flex;
+    width: 100vw; /* Cambia de 100% a 100vw para ocupar el ancho total de la ventana */
+    height: 100vh; /* Asegura que ocupa toda la altura */
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Previene el desbordamiento */
+}
+
+/* Sección del logo */
+.logo-section {
+    background-color: #f3f4f6;
+    width: 50vw; /* Cambia a vw para garantizar que ocupe la mitad de la pantalla */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Estilo del logo */
+.logo {
+    width: 60%; /* Ajusta el tamaño del logo */
+    height: auto;
+}
+
+/* Sección del formulario */
+.form-section {
+    background-color: rgba(81, 0, 0, 0.902);
+    width: 50vw; /* Cambia a vw para garantizar que ocupe la mitad de la pantalla */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Contenedor del formulario */
+.form-container {
+    background-color: #f3f4f6;
+    padding: 2rem;
+    width: 80%; /* Ajusta el ancho del formulario */
+    max-width: 400px;
+    text-align: center;
+    box-shadow: inset 0px 0px 8px 0px rgba(0,0,0,0.75);
+}
+
+/* Título del formulario */
+.form-container h1 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 1.5rem;
+}
+
+/* Estilo de los campos de entrada */
+.form-container input[type="text"],
+.form-container input[type="password"] {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+    box-sizing: border-box;
+    font-family: "Lexend", sans-serif;
+    text-align: center;
+}
+
+.form-container input[type="text"]::placeholder,
+.form-container input[type="password"]::placeholder {
+    text-align: center;
+}
+
+/* Botón de enviar */
+.form-container button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: rgb(177, 8, 8);
+    color: #fff;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    box-sizing: border-box;
+    font-family: "Lexend", sans-serif;
+}
+
+/* Efecto hover en el botón */
+.form-container button:hover {
+    background-color: rgb(129, 6, 6);
+}
+
+/* Mensaje de error */
+.error-message {
+    font-size: 0.875rem;
+    color: #d9534f;
+    text-align: left;
+}
+
+#center_logo_responsive {
+    display: none;
+}
+
+/* Ajustes responsivos para pantallas pequeñas */
+@media (max-width: 768px) {
+    .split-container {
+        flex-direction: column;
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+    }
+
+    .logo-section {
+        display: none;
+    }
+
+    .form-section {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f3f4f6;
+        background-color: rgba(81, 0, 0, 0.902);
+    }
+
+    .form-container {
+        width: 90%;
+        max-width: 400px;
+        padding: 2rem;
+        margin: 0;
+        background-color: #ffffff;
+        box-shadow: inset 0px 0px 8px 0px rgba(0,0,0,0.75);
+        border-radius: 0;
+    }
+
+    .logo {
+        width: 60%;
+        margin-bottom: 1rem;
+    }
+
+    #center_logo_responsive {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}

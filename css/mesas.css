@@ -1,0 +1,477 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
+
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    font-family: "Lexend", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    background-color: rgb(190, 190, 190);
+}
+
+#container_header {
+    width: 100%;
+    height: 15%;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    margin-bottom: 5vh;
+}
+
+#container-username {
+    display: flex;
+}
+
+#mesas_main {
+    width: 100%;
+    height: 80%;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#mapaRestaurante_contenedor {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+#mapa {
+    height: 75vh;
+}
+
+/* Divs para espaciado */
+#divGrande {
+    width: 146.9vh;
+    height: 75vh;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+#divEntrada {
+    width: 13.2%;
+    height: 8%;
+}
+#divEntrada:hover {
+    background-color: rgba(0,0,0,0.2);
+}
+#divSalas {
+    width: 100%;
+    height: 65.4%;
+    display: flex;
+}
+#divTerraza3 {
+    width: 62.4%;
+    height: 100%;
+}
+#divTerraza3:hover {
+    background-color: rgba(0,0,0,0.2);
+}
+#divAbajo {
+    width: 72.9%;
+    height: 26.6%;
+    display: flex;
+}
+#divTerrazasLados {
+    width: 100%;
+    height: 59.3%;
+}
+#divTerrazasLados:hover {
+    background-color: rgba(0,0,0,0.2);
+}
+#divLados {
+    width: 13.5%;
+    height: 100%;
+}
+#divSala1 {
+    width: 36.5%;
+    height: 100%;
+    display: flex;
+}
+#divSala1:hover {
+    background-color: rgba(0,0,0,0.2);
+}
+#divSala2 {
+    width: 36.5%;
+    height: 100%;
+    display: flex;
+}
+#divSala2:hover {
+    background-color: rgba(0,0,0,0.2);
+}
+#divSalasPriv {
+    width: 37.4%;
+    height: 100%;
+}
+#divSalaPriv {
+    width: 100%;
+    height: 40.7%;
+}
+#divSalaPriv:hover {
+    background-color: rgba(0,0,0,0.2);
+}
+#divTerrazaPriv {
+    height: 100%;
+    width: 37.4%;
+}
+#divSalaPrivAbajo {
+    width: 18.8%;
+    height: 100%;
+}
+#divSalaPrivAbajo:hover {
+    background-color: rgba(0,0,0,0.2);
+}
+.comunSalasMesas {
+    padding: 4%;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.comunSalasMesa {
+    padding: 4%;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.terrazasVerticales {
+    padding: 4%;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content:end;
+    flex-direction: column;
+}
+.salaGrandeDividida {
+    width: 50%;
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+#mesasCentro {
+    margin: 4px;
+}
+
+/* ------------------ */
+
+/* mesas */
+.mesa {
+    height: 12vh;
+    cursor: pointer;
+}
+.mesa:hover {
+    transform: scale(1.2);
+}
+/* ------ */
+
+#icon_profile_header, #container_header {
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+#icon_profile {
+    width: 6vw;
+    margin-left: 1vw;
+}
+
+#p_username_profile, .span_subtitle, .btn_custom_logOut, .btn_custom_filter, .btn_custom_filterOK {
+    color: rgb(177, 8, 8);;
+}
+
+#p_username_profile {
+    font-size: 5vh;
+    margin: 0;
+}
+
+#username_profile_header {
+    margin-left: 1vw;
+}
+
+#container_logOut_header {
+    margin-right: 1vw;
+}
+
+#container_title_header {
+    margin-left: 1.5vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.btn_custom_logOut {
+    border: solid 1px rgb(177, 8, 8);
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn_custom_logOut:hover {
+    background-color: rgb(177, 8, 8);
+    border: solid 1px rgb(177, 8, 8);
+}
+
+.btn_custom_filter {
+    border: solid 1px rgb(177, 8, 8);
+    background-color: rgb(190, 190, 190);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.btn_custom_filter:hover {
+    background-color: rgb(177, 8, 8);
+    border: solid 1px rgb(177, 8, 8);
+}
+
+.btn_custom_filterOK {
+    border: solid 2px rgb(177, 8, 8);
+    background-color: rgb(133, 133, 133);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.btn_custom_filterOK:hover {
+    background-color: rgb(177, 8, 8);
+    border: solid 1px rgb(177, 8, 8);
+}
+
+#title_header {
+    all: unset;
+    font-size: 7vh;
+    color: rgb(177, 8, 8);
+    height: 9vh;
+}
+
+#container_title_header_2 {
+    margin-right: 1.706vw;
+    display: flex;
+    flex-direction: column;
+}
+
+#bind_result {
+    width: 100%;
+    text-align: center;
+}
+
+#img_dinero_perdido {
+    width: 50vw;
+}
+
+/* Efecto hover sobre las filas de la tabla */
+#reservas_table tbody tr:hover {
+    background-color: #f5f5f5;
+    cursor: pointer;
+}
+
+#reservas_table tbody tr:hover td {
+    color: #333;
+}
+
+.a_order_column {
+    all: unset;
+}
+
+.a_order_column:hover {
+    all: unset;
+    cursor: pointer;
+}
+
+#contenedorFiltros {
+    border: 4px solid rgb(177, 8, 8);
+    background-color: rgb(89, 89, 89);
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    min-height: 30%;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 20px;
+    display: none;
+    color: white;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.7);
+}
+
+.form-control {
+    width: 100%;
+}
+
+.col-sm-2 {
+    width: 50%;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.row {
+    display: flex;
+    margin-top: 10px;
+}
+.col-sm-10 {
+    padding: none;
+    width: 50%;
+    display: flex;
+}
+
+#contenedorMesas{
+    border: 4px solid rgb(177, 8, 8);
+    background-color: rgb(89, 89, 89);
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    min-height: 30%;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 20px;
+    color: white;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.7);
+}
+
+#tituloFiltros {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.botonesAcciones {
+    height: 40px;
+    width: 45%;
+}
+
+.contenedorBotonesAcciones {
+    width: 100%;
+    justify-content: center;
+}
+
+#headerTituloFiltros {
+    width: 100%;
+    display: flex;
+}
+#filter_button {
+    height: 40px;
+    margin-left: 40px;
+}
+#cerrar {
+    cursor: pointer;
+    font-size: 30px;
+    color: #aaa;
+    transition: color 0.3s ease;
+    position: absolute;
+    top: 10px;  /* Ajusta la distancia desde la parte superior del contenedor */
+    right: 10px; /* Ajusta la distancia desde el borde derecho del contenedor */
+}
+
+#cerrar:hover {
+    color: #000;  /* Cambia el color de la "X" al pasar el mouse */
+}
+
+/* Media queries para diseño responsive */
+
+@media (max-width: 768px) {
+    #container_header {
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+        padding: 0.5rem;
+    }
+
+    #icon_profile {
+        width: 13vw;
+    }
+
+    #container-username, #container_title_header, #nav_header {
+        flex: 1 1 auto;
+        text-align: center;
+        margin-bottom: 0.5rem;
+    }
+
+    #mapa {
+        height: 40vh; /* Reducir un poco más la altura del mapa */
+        max-width: 90vw;
+    }
+
+    #divGrande {
+        height: 40vh; /* Reducir un poco más la altura del mapa */
+        max-width: 90vw;
+    }
+
+    .mesa {
+        height: 6vh; /* Reducir el tamaño de las mesas en esta resolución */
+    }
+
+    #title_header {
+        font-size: 4.5vh;
+    }
+
+    #p_username_profile {
+        font-size: 3.5vh;
+    }
+
+    .btn_custom_logOut {
+        font-size: 1.2rem;
+        padding: 0.4rem 0.8rem;
+        margin: 0.2rem;
+    }
+
+    .span_subtitle {
+        font-size: 1.5vh;
+    }
+    #divTerraza3 {
+        width: 62.4%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    #container_header {
+        padding: 0.5rem;
+    }
+
+    #icon_profile {
+        width: 15vw;
+    }
+
+    #mapa {
+        height: 30vh; /* Aún más pequeño para pantallas muy pequeñas */
+        max-width: 80vw;
+    }
+
+    #divGrande {
+        height: 30vh; /* Aún más pequeño para pantallas muy pequeñas */
+        max-width: 80vw;
+    }
+
+    .mesa {
+        height: 4vh; /* Tamaño de mesa más pequeño para pantallas de 480px */
+    }
+
+    #title_header {
+        font-size: 4vh;
+    }
+
+    #p_username_profile {
+        font-size: 3vh;
+    }
+
+    .btn_custom_logOut {
+        padding: 0.3rem 0.6rem;
+        font-size: 1rem;
+        margin: 0.2rem;
+    }
+
+    .span_subtitle {
+        font-size: 1.4vh;
+    }
+    #divTerraza3 {
+        width: 62.4%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+    }
+}
