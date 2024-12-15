@@ -108,7 +108,7 @@ $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <td><?php echo htmlspecialchars($usuario['apellidos_usuario']); ?></td>
                     <td><?php echo htmlspecialchars($usuario['nombre_rol']); ?></td>
                     <td>
-                        <a href="editar_usuario.php?id=<?php echo $usuario['id_usuario']; ?>" 
+                        <a href="../php/editarUsuario.php?id=<?php echo $usuario['id_usuario']; ?>" 
                            class="btn btn-warning btn-sm">
                            <i class="fas fa-edit"></i>
                         </a>
