@@ -1,26 +1,18 @@
 <?php
+    session_start();
 
-// Iniciamos la sesión
-session_start();
+    if (empty($_SESSION['user_id'])) {
+        header("Location: ./index.php");
+        exit();
+    }
 
-// Verificamos si la sesión del camarero está activa
-if (empty($_SESSION['user_id'])) {
-    // Si no está activo, redirigimos a la página de inicio de sesión
-    header("Location: ./index.php");
-    exit();
-}
+    require '../php/conexion.php';
+    require '../php/estadoMesaRecuperar.php';
+    require_once '../php/functions.php';
 
-// Incluimos el archivo de conexión a la base de datos
-require '../php/conexion.php';
-require '../php/estadoMesaRecuperar.php';
-require_once '../php/functions.php';
+    $id_camarero = $_SESSION['user_id'];
 
-// Obtenemos el ID del camarero desde la sesión
-$id_camarero = $_SESSION['user_id'];
-
-// Recojemos la información del usuario que está guardado en la BBDD
-$info_waiter = get_info_waiter_bbdd($conn, $id_camarero);
-
+    $info_waiter = get_info_waiter_bbdd($conn, $id_camarero);
 ?>
 
 <!DOCTYPE html>
@@ -34,32 +26,35 @@ $info_waiter = get_info_waiter_bbdd($conn, $id_camarero);
 </head>
 <body>
     <!-- Cabecera -->
-        <header id="container_header">
-            <!-- Contenedor del usuario -->
-            <div id="container-username">
-                <!-- icono del usuario  -->
-                <div id="icon_profile_header">
-                    <img src="../img/logoSinFondo.png" alt="" id="icon_profile">
-                </div>
-                <!-- Contenedor de la información del usuario -->
-                <div id="username_profile_header">
-                    <p id="p_username_profile"><?php echo htmlspecialchars($info_waiter['username']) ?></p>
-                    <span class="span_subtitle"><?php echo htmlspecialchars($info_waiter['name']) . " " . htmlspecialchars($info_waiter['surname']) ?></span>
-                </div>
+    <header id="container_header">
+        <!-- Contenedor del usuario -->
+        <div id="container-username">
+            <!-- icono del usuario -->
+            <div id="icon_profile_header">
+                <img src="../img/logoSinFondo.png" alt="" id="icon_profile">
             </div>
-
-            <!-- Contenedor del título de la página -->
-            <div id="container_title_header">
-                <h1 id="title_header"><strong>Dinner At Westfield</strong></h1>
-                <span class="span_subtitle">Gestión de mesas</span>
+            <!-- Contenedor de la información del usuario -->
+            <div id="username_profile_header">
+                <p id="p_username_profile"><?php echo htmlspecialchars($info_waiter['username'] ?? 'Desconocido'); ?></p>
+                <span class="span_subtitle">
+                    <?php echo htmlspecialchars(($info_waiter['name'] ?? 'Usuario') . " " . ($info_waiter['surname'] ?? 'Desconocido')); ?>
+                </span>
             </div>
+        </div>
 
-            <!-- Contenedor de navegación -->
-            <nav id="nav_header">
-                <a href="./historico.php" class="btn btn-danger me-2 btn_custom_logOut">Histórico reservas</a>
-                <a href="../php/cerrarSesion.php" class="btn btn-danger btn_custom_logOut m-1">Cerrar sesión</a>
-            </nav>
-        </header>
+        <!-- Contenedor del título de la página -->
+        <div id="container_title_header">
+            <h1 id="title_header"><strong>Dinner At Westfield</strong></h1>
+            <span class="span_subtitle">Gestión de Ocupaicones</span>
+        </div>
+
+        <!-- Contenedor de navegación -->
+        <nav id="nav_header">
+            <a href="./reservas.php" class="btn btn-danger me-2 btn_custom_logOut">Reservas</a>
+            <a href="./historico.php" class="btn btn-danger me-2 btn_custom_logOut">Histórico</a>
+            <a href="../php/cerrarSesion.php" class="btn btn-danger btn_custom_logOut m-1">Cerrar sesión</a>
+        </nav>
+    </header>
 
     <main id="mesas_main">
         <div id="mapaRestaurante_contenedor">
@@ -301,13 +296,13 @@ $info_waiter = get_info_waiter_bbdd($conn, $id_camarero);
     </main>
     
     <?php
-   if (isset($_GET['id']) && ($_GET['id'] != "")) {
+    if (isset($_GET['id']) && ($_GET['id'] != "")) {
         $id = htmlspecialchars($_GET['id']);
     ?>
     <div id="contenedorMesas">
         <span class="close" id="cerrar">&times;</span>
             <div id="tituloMesas">
-                <h3>Mesa</h3>
+                <h3>Ocupar Mesa</h3>
             </div>
             <div class="form-group row">
             </div>
@@ -325,70 +320,32 @@ $info_waiter = get_info_waiter_bbdd($conn, $id_camarero);
                             INNER JOIN 
                                 tbl_ocupacion ON tbl_mesa.id_mesa = tbl_ocupacion.id_mesa
                             WHERE 
-                                tbl_mesa.id_mesa = ?;";
+                                tbl_mesa.id_mesa = :id";
 
-            $stmt_table_estado = mysqli_prepare($conn, $queryMesas);
-            mysqli_stmt_bind_param($stmt_table_estado, "i", $id);
+            $stmt_table_estado = $conn->prepare($queryMesas);
+            $stmt_table_estado->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt_table_estado->execute();
+            $result = $stmt_table_estado->fetch(PDO::FETCH_ASSOC);
 
-            // Ejecutar la declaración
-            mysqli_stmt_execute($stmt_table_estado);
+            if ($result) {
+                echo "Número de la mesa: " . htmlspecialchars($result["id_mesa"]) . "<br>";
+                echo "Número de sillas: " . htmlspecialchars($result["numero_sillas_mesa"]) . "<br>";
+                echo "Ubicación de la mesa: " . htmlspecialchars($result["sala"]) . "<br>";
 
-            // Obtener el resultado
-            $result = mysqli_stmt_get_result($stmt_table_estado);
-            
-            if (mysqli_num_rows($result) > 0) {
-                // Obtener los datos de la mesa
-                $mesaInfo = mysqli_fetch_assoc($result);
-
-                echo "Id de la mesa: " . $mesaInfo["id_mesa"] . "<br>";
-                echo "Numero de sillas: " . $mesaInfo["numero_sillas_mesa"] . "<br>";
-                echo "Ubicacion de la mesa: " . $mesaInfo["sala"] . "<br>";
-
-                if ($_SESSION['ARRAYocupaciones'][$mesaInfo["id_mesa"]] === "Ocupado") {
-                    $queryCamarero = "SELECT 
-                                        tbl_camarero.nombre_camarero AS nombre,
-                                        tbl_camarero.apellidos_camarero AS apellidos
-                                    FROM 
-                                        tbl_mesa
-                                    INNER JOIN 
-                                        tbl_ocupacion ON tbl_mesa.id_mesa = tbl_ocupacion.id_mesa
-                                    INNER JOIN 
-                                        tbl_camarero ON tbl_camarero.id_camarero = tbl_ocupacion.id_camarero
-                                    WHERE 
-                                        tbl_mesa.id_mesa = ?
-                                    AND 
-                                        tbl_ocupacion.estado_ocupacion LIKE 'Ocupado';";
-
-                    $stmt_camarero = mysqli_prepare($conn, $queryCamarero);
-                    mysqli_stmt_bind_param($stmt_camarero, "i", $id);
-
-                    // Ejecutar la declaración
-                    mysqli_stmt_execute($stmt_camarero);
-
-                    // Obtener el resultado
-                    $result = mysqli_stmt_get_result($stmt_camarero);
-                    $infoCamarero = mysqli_fetch_assoc($result);
-
-                    echo "Camarero: " . $infoCamarero["nombre"] . " " . $infoCamarero['apellidos'] ."<br>";
-                    echo'<br>';
-                    echo'<br>';
-                    echo '<a href="../php/liberarMesas.php?id=' . $mesaInfo['id_mesa'] . '"><button class="btn btn-danger btn_custom_filter">LIBERAR</button></a>';
+                $estadoMesa = $_SESSION['ARRAYocupaciones'][$result["id_mesa"]] ?? 'Disponible';
+                if ($estadoMesa === "Ocupado") {
+                    echo '<a href="../php/liberarMesas.php?id=' . htmlspecialchars($result['id_mesa']) . '"><button class="btn btn-danger btn_custom_filter">LIBERAR</button></a>';
                 } else {
-                    echo'<br>';
-                    echo'<br>';
-                    echo '<a href="../php/reservaMesas.php?id=' . $mesaInfo['id_mesa'] . '"><button class="btn btn-danger btn_custom_filter">OCUPAR</button></a>';
-
+                    echo '<a href="../php/reservaMesas.php?id=' . htmlspecialchars($result['id_mesa']) . '"><button class="btn btn-danger btn_custom_filter">OCUPAR</button></a>';
                 }
             } else {
                 echo "Esta mesa no existe";
             }
-
             ?>
     </div>
-
-<?php
-   }
-   ?>
+    <?php
+    }
+    ?>
 
 <script src="../js/modal.js"></script>
 </body>

@@ -2,18 +2,19 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$database = "restaurante_bbdd";
+$database = "restaurante2_bbdd";
 
-// Intenta hacer la conexión
 try {
-    $conn = mysqli_connect($servername, $username, $password, $database);
-    // Verifica la conexión
-    if ($conn->connect_error) {
-        throw new Exception("Connection failed: " . $conn->connect_error); // Lanza una excepción en caso de error
-    }
+    // Crea la conexión con PDO
+    $conn = new PDO("mysql:host=$servername;dbname=$database;charset=utf8", $username, $password);
 
-} catch (Exception $e) {
-    // Muestra por pantallal el error
-    die("Error: " . $e->getMessage());
+    // Configura el modo de error de PDO
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // Mensaje opcional (puedes eliminarlo en producción)
+    // echo "Conexión exitosa";
+} catch (PDOException $e) {
+    // Maneja errores de conexión
+    die("Error de conexión: " . $e->getMessage());
 }
 ?>
