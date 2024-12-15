@@ -123,4 +123,5 @@ CREATE TABLE tbl_sillas (
     FOREIGN KEY (id_mesa) REFERENCES tbl_mesa(id_mesa)
 );
 ```
-**Autor: 👨‍💻David Hompanera**
+**Autor:**
+**👨‍💻David Hompanera**
