@@ -122,5 +122,5 @@ CREATE TABLE tbl_sillas (
     estado_silla ENUM('disponible', 'rota') DEFAULT 'disponible',
     FOREIGN KEY (id_mesa) REFERENCES tbl_mesa(id_mesa)
 );
-
+```
 - **👨‍💻David Hompanera**
