@@ -12,25 +12,72 @@ function redirect_with_errors($url, $errors) {
 
 // Función que recupera la información del camarero
 function get_info_waiter_bbdd($conn, $id_camarero) {
-    $id_camarero = mysqli_real_escape_string($conn, $id_camarero);
+    try {
+        // Preparamos la consulta
+        $query = "SELECT * FROM tbl_usuario WHERE id_usuario = :id_camarero";
+        $stmt_info = $conn->prepare($query);
 
-    // Query para seleccionar la info del camarero
-    $query = "SELECT * FROM tbl_camarero WHERE id_camarero  = ?";
+        // Ejecutamos la consulta con el parámetro
+        $stmt_info->bindParam(':id_camarero', $id_camarero, PDO::PARAM_INT);
+        $stmt_info->execute();
 
-    $stmt_info = mysqli_stmt_init($conn);
+        // Obtenemos el resultado
+        $row = $stmt_info->fetch(PDO::FETCH_ASSOC);
 
-    // Preparamos la consulta
-    if (mysqli_stmt_prepare($stmt_info, $query)) {
-        mysqli_stmt_bind_param($stmt_info, 'i', $id_camarero);
-        mysqli_stmt_execute($stmt_info);
+        if ($row) {
+            return [
+                'username' => $row['username'], 
+                'name' => $row['nombre_usuario'], 
+                'surname' => $row['apellidos_usuario']
+            ];
+        } else {
+            return null; // No se encontró el camarero
+        }
+    } catch (PDOException $e) {
+        error_log("Error al recuperar información del camarero: " . $e->getMessage());
+        return null;
+    }
+}
 
-        $result = mysqli_stmt_get_result($stmt_info);
-        $row = mysqli_fetch_assoc($result);
+// Función simple para verificar el estado de una reserva
+function get_estado_reserva($conn, $id_reserva) {
+    try {
+        $query = "SELECT estado_reserva FROM tbl_reservas WHERE id_reserva = :id_reserva";
+        $stmt = $conn->prepare($query);
+        $stmt->bindParam(':id_reserva', $id_reserva, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchColumn();
+    } catch (PDOException $e) {
+        error_log("Error al obtener estado de reserva: " . $e->getMessage());
+        return null;
+    }
+}
 
-        // Cerramos el stmt
-        mysqli_stmt_close($stmt_info);
-
-        return ['username' => $row['username'], 'name' => $row['nombre_camarero'], 'surname' => $row['apellidos_camarero']];
+/**
+ * Actualiza el estado de las reservas a 'Completada' cuando su fecha ha pasado
+ * @param PDO $conn Conexión a la base de datos
+ * @return bool True si la actualización fue exitosa, False en caso contrario
+ */
+function actualizarReservasCompletadas($conn) {
+    try {
+        $query = "UPDATE tbl_reservas 
+                  SET estado_reserva = 'Completada'
+                  WHERE fecha_reserva < DATE_SUB(NOW(), INTERVAL 2 HOUR)
+                  AND estado_reserva = 'Confirmada'";
+        
+        $stmt = $conn->prepare($query);
+        $resultado = $stmt->execute();
+        
+        if($resultado) {
+            error_log("Actualización de estados completada: " . date('Y-m-d H:i:s'));
+            return true;
+        } else {
+            error_log("Error en actualización de estados: " . date('Y-m-d H:i:s'));
+            return false;
+        }
+    } catch (PDOException $e) {
+        error_log("Error en la actualización: " . $e->getMessage());
+        return false;
     }
 }
 ?>
