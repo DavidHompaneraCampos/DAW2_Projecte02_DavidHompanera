@@ -319,7 +319,7 @@ html, body {
     border: 4px solid rgb(177, 8, 8);
     background-color: rgb(89, 89, 89);
     position: absolute;
-    top: 55%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 400px;
@@ -429,6 +429,10 @@ html, body {
 }
 
 @media (max-width: 480px) {
+    #modalCancelar {
+        height: 30% !important;
+    }
+
     #container_header {
         padding: 0.5rem;
     }
@@ -474,4 +478,59 @@ html, body {
         display: flex;
         justify-content: center;
     }
+}
+
+.modal {
+    background-color: rgb(89, 89, 89) !important;
+    color: white !important;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 500px;
+    padding: 20px;
+    border-radius: 5px;
+    z-index: 1050;
+    max-height: 425px;
+}
+
+.modal-content {
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.modal-header {
+    border-bottom: none !important;
+    padding: 0.25rem 0.5rem !important;
+}
+
+.modal-title {
+    margin: 0 !important;
+}
+
+/* Resto de los estilos se mantienen igual */
+
+.form-control {
+    background-color: rgba(68, 68, 68, 0.95) !important;
+    color: white !important;
+    border: 1px solid white !important;
+}
+
+.form-control:focus {
+    background-color: rgba(68, 68, 68, 0.95) !important;
+    color: white !important;
+}
+
+.form-label {
+    color: white !important;
+}
+
+#modalCancelar {
+    height: 62%;
+}
+
+.reserva-item:hover {
+    background-color: rgba(0, 0, 0, 0.1); /* Oscurece ligeramente al pasar el ratón */
 }
