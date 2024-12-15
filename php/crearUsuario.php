@@ -152,7 +152,7 @@ $roles = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <div class="mb-3">
                         <label for="rol" class="form-label">Rol</label>
                         <select class="form-control" id="rol" name="rol">
-                            <option value="">Seleccione un rol</option>
+                            <option value="" disabled selected>Seleccione un rol</option>
                             <?php foreach ($roles as $rol): ?>
                                 <option value="<?php echo $rol['id_rol']; ?>">
                                     <?php echo htmlspecialchars($rol['nombre_rol']); ?>

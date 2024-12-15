@@ -2,7 +2,8 @@
 INSERT INTO tbl_roles (nombre_rol) VALUES
 ('Administrador'),
 ('Camarero'),
-('Cliente');
+('Gerente'),
+('Personal Mantenimiento');
 
 -- Inserciones para tbl_usuario (Incluye camareros y administrador)
 INSERT INTO tbl_usuario (nombre_usuario, apellidos_usuario, username, password, id_rol) VALUES
