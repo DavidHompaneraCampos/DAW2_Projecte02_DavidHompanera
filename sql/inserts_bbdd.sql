@@ -53,6 +53,14 @@ INSERT INTO tbl_mesa (id_sala, numero_sillas_mesa) VALUES
 (5, 2), 
 (8, 4);
 
+-- Generar sillas automáticamente basadas en el numero_sillas_mesa
+INSERT INTO tbl_sillas (id_mesa, estado_silla)
+SELECT m.id_mesa, 'disponible'
+FROM tbl_mesa m
+CROSS JOIN (SELECT 1 AS num UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 
+            UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8) AS n
+WHERE n.num <= m.numero_sillas_mesa;
+
 -- Inserciones para tbl_ocupacion (Reemplazando id_camarero con id_usuario)
 INSERT INTO tbl_ocupacion (id_mesa, id_usuario, fecha_inicio, fecha_final, estado_ocupacion) VALUES
 (1, 1, NULL, NULL, 'Disponible'),

@@ -4,7 +4,7 @@ require_once '../php/conexion.php';
 
 // Verificar si el usuario es administrador
 if (!isset($_SESSION['user_id']) || $_SESSION['rol'] !== 'Administrador') {
-    header('Location: ../index.php');
+    header('Location: ../view/index.php');
     exit();
 }
 
@@ -82,6 +82,7 @@ $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <div id="headerTituloFiltros" class="d-flex justify-content-between align-items-center">
             <h2>Gestión de Usuarios</h2>
             <div>
+                <a href="gestionRecursos.php" class="btn btn-danger btn_custom_filter me-2">Gestion de Recursos</a>
                 <a href="../php/crearUsuario.php" class="btn btn-danger btn_custom_filter me-2">
                     <i class="fas fa-plus"></i> Nuevo Usuario
                 </a>
