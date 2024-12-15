@@ -1,0 +1,35 @@
+/* Estilos específicos para el formulario de crear usuario */
+main.container .form-label {
+    color: #333333 !important; /* Color gris oscuro para labels */
+}
+
+main.container .form-control,
+main.container select.form-control {
+    background-color: white !important; /* Fondo blanco para los inputs */
+    border: none !important;
+    color: #333333 !important; /* Color gris oscuro para el texto */
+}
+
+main.container .form-control:focus,
+main.container select.form-control:focus {
+    background-color: white !important;
+    color: #333333 !important;
+    box-shadow: none !important;
+}
+
+/* Para el título */
+main.container h2.card-title {
+    color: #333333;
+}
+
+/* Añadir al final del archivo */
+.error-message {
+    color: #dc3545;
+    font-size: 14px;
+    margin-top: 5px;
+    display: block;
+}
+
+.form-control.error {
+    border-color: #dc3545 !important;
+}

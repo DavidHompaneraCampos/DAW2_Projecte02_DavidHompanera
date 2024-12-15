@@ -1,4 +1,4 @@
-<html>
+<html> 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,54 +28,59 @@ if (empty($_POST['user']) || empty($_POST['contrasena'])) {
 }
 
 // Recogemos las variables del formulario
-$username = mysqli_real_escape_string($conn, htmlspecialchars($_POST['user']));
+$username = htmlspecialchars($_POST['user']);
 $password = htmlspecialchars($_POST['contrasena']);
 
-// Preparamos la consulta
-$query = "SELECT id_camarero, password FROM tbl_camarero WHERE username = ?";
-$stmt = mysqli_stmt_init($conn);
+try {
+    // Modificamos la consulta para unir con la tabla de roles
+    $query = "SELECT u.id_usuario, u.password, r.nombre_rol 
+              FROM tbl_usuario u 
+              INNER JOIN tbl_roles r ON u.id_rol = r.id_rol 
+              WHERE u.username = :username";
+    
+    $stmt = $conn->prepare($query);
+    $stmt->bindParam(':username', $username);
+    $stmt->execute();
 
-if (mysqli_stmt_prepare($stmt, $query)) {
-    mysqli_stmt_bind_param($stmt, 's', $username);
-    mysqli_stmt_execute($stmt); 
-    $result = mysqli_stmt_get_result($stmt);
-
-    // Comprueba si hay resultado
-    if ($row = mysqli_fetch_assoc($result)) {
-
-        // Verificamos que la contraseña sea correcta
+    if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         if (password_verify($password, $row['password'])) {
-            // En caso que sea correcto, inicializamos la variable de SESSION y redirijimos a mesas.php con el ID del usuario
             session_start();
-            $_SESSION['user_id'] = $row['id_camarero'];
+            $_SESSION['user_id'] = $row['id_usuario'];
+            $_SESSION['rol'] = $row['nombre_rol'];
 
-            // Cerramos las consultas y la conexión
-            mysqli_stmt_close($stmt);
-            mysqli_close($conn);
-
-            // Redirección a mesas.php con SweetAlert
-            echo "<script type='text/javascript'>
-                Swal.fire({
-                    title: 'Inicio de sesión',
-                    text: '¡Has iniciado sesión correctamente!',
-                    icon: 'success',
-                    confirmButtonText: 'OK'
-                }).then(function() {
-                    window.location.href = '../view/mesas.php';
-                });
-                </script>";
+            if ($row['nombre_rol'] === 'Administrador') {
+                echo "<script type='text/javascript'>
+                    Swal.fire({
+                        title: 'Inicio de sesión',
+                        text: '¡Bienvenido Administrador!',
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    }).then(function() {
+                        window.location.href = '../view/gestionUsuarios.php';
+                    });
+                    </script>";
+            } else {
+                echo "<script type='text/javascript'>
+                    Swal.fire({
+                        title: 'Inicio de sesión',
+                        text: '¡Has iniciado sesión correctamente!',
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    }).then(function() {
+                        window.location.href = '../view/mesas.php';
+                    });
+                    </script>";
+            }
             exit();
         }
     }
-    
-    $errors[] = 'Credenciales incorrectas';
 
-    // Cerramos las consultas
-    mysqli_stmt_close($stmt);
+    $errors[] = 'Credenciales incorrectas';
+} catch (PDOException $e) {
+    $errors[] = "Error en la base de datos: " . $e->getMessage();
 }
 
-// Cerramos la conexión
-mysqli_close($conn);
+// Redirección en caso de error
 redirect_with_errors('../view/index.php', $errors);
 ?>
 </body>
