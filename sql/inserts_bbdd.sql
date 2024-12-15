@@ -14,17 +14,17 @@ INSERT INTO tbl_usuario (nombre_usuario, apellidos_usuario, username, password, 
 ('Laura', 'Martínez Gómez', 'lauram', '$2y$10$GMV4gk/G7uCYrrRf/4YnmukMLnLwYcTElPR3ssLZuS8cZ4D8JBI8W', 2),
 ('Admin', 'Principal', 'admin', '$2y$10$GMV4gk/G7uCYrrRf/4YnmukMLnLwYcTElPR3ssLZuS8cZ4D8JBI8W', 1);
 
--- Inserciones para tbl_sala
-INSERT INTO tbl_sala (ubicacion_sala) VALUES
-('Sala 1'),
-('Sala 2'),
-('Terraza Exterior 1'),
-('Terraza Exterior 2'),
-('Terraza Exterior 3'),
-('Sala Privada 1'),
-('Sala Privada 2'),
-('Sala Privada 3'),
-('Sala Privada 4');
+-- Inserciones para tbl_sala con imágenes
+INSERT INTO tbl_sala (ubicacion_sala, imagen_sala) VALUES
+('Sala 1', '../img/spagueti.jpg'),
+('Sala 2', '../img/pizza.jpg'),
+('Terraza Exterior 1', '../img/carne.jpg'),
+('Terraza Exterior 2', '../img/pez.jpg'),
+('Terraza Exterior 3', '../img/hamburguesa.jpg'),
+('Sala Privada 1', '../img/sushi.jpg'),
+('Sala Privada 2', '../img/tortilla.jpg'),
+('Sala Privada 3', '../img/bocata.jpg'),
+('Sala Privada 4', '../img/ensalada.jpg');
 
 -- Inserciones para tbl_mesa
 INSERT INTO tbl_mesa (id_sala, numero_sillas_mesa) VALUES
