@@ -86,7 +86,7 @@ $salas = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <td><?php echo htmlspecialchars($sala['total_mesas']); ?></td>
                     <td><?php echo htmlspecialchars($sala['total_sillas']); ?></td>
                     <td>
-                        <a href="editarRecurso.php?id_sala=<?php echo $sala['id_sala']; ?>" 
+                        <a href="../php/editarRecurso.php?id_sala=<?php echo $sala['id_sala']; ?>" 
                         class="btn btn-warning btn-sm" onclick="event.stopPropagation();">
                             <i class="fas fa-edit"></i>
                         </a>

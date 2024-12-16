@@ -16,7 +16,7 @@ INSERT INTO tbl_usuario (nombre_usuario, apellidos_usuario, username, password, 
 
 -- Inserciones para tbl_sala con imágenes
 INSERT INTO tbl_sala (ubicacion_sala, imagen_sala) VALUES
-('Sala 1', '../img/spagueti.jpg'),
+('Sala 1', '../img/spaguetti.jpg'),
 ('Sala 2', '../img/pizza.jpg'),
 ('Terraza Exterior 1', '../img/carne.jpg'),
 ('Terraza Exterior 2', '../img/pez.jpg'),
