@@ -89,8 +89,7 @@ $mesas = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <main class="container mt-5">
         <div id="headerTituloFiltros" class="d-flex justify-content-between align-items-center">
             <h2>Gestión de Mesas</h2>
-            <a href="../php/crearRecurso.php?id_sala=<?php echo $id_sala; ?>" 
-               class="btn btn-danger btn_custom_filter me-2">
+            <a href="../php/crearMesa.php?id_sala=<?php echo htmlspecialchars($id_sala); ?>" class="btn btn-danger btn_custom_filter me-2">
                 <i class="fas fa-plus"></i> Nueva Mesa
             </a>
         </div>
@@ -112,11 +111,11 @@ $mesas = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <td><?php echo htmlspecialchars($mesa['id_mesa']); ?></td>
                             <td><?php echo htmlspecialchars($mesa['numero_sillas_mesa']); ?></td>
                             <td>
-                                <a href="editarMesa.php?id_mesa=<?php echo $mesa['id_mesa']; ?>" 
-                                   class="btn btn-warning btn-sm" onclick="event.stopPropagation();">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                                <button onclick="event.stopPropagation(); confirmarEliminar(<?php echo $mesa['id_mesa']; ?>)" 
+                            <a href="../php/editarMesa.php?id_mesa=<?php echo $mesa['id_mesa']; ?>&id_sala=<?php echo $id_sala; ?>" 
+                            class="btn btn-warning btn-sm" onclick="event.stopPropagation();">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                                <button onclick="event.stopPropagation(); confirmarEliminar(<?php echo $mesa['id_mesa']; ?>, <?php echo $id_sala; ?>)" 
                                         class="btn btn-danger btn-sm">
                                     <i class="fas fa-trash"></i>
                                 </button>
@@ -136,7 +135,7 @@ $mesas = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-    function confirmarEliminar(id_mesa) {
+    function confirmarEliminar(id_mesa, id_sala) {
         Swal.fire({
             title: '¿Estás seguro?',
             text: 'No podrás revertir esta acción',
@@ -148,7 +147,7 @@ $mesas = $stmt->fetchAll(PDO::FETCH_ASSOC);
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = `../php/eliminarMesa.php?id_mesa=${id_mesa}`;
+                window.location.href = `../php/eliminarMesa.php?id_mesa=${id_mesa}&id_sala=${id_sala}`;
             }
         });
     }
