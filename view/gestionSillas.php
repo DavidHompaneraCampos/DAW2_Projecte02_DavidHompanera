@@ -90,7 +90,7 @@ $sillas = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <td><?php echo htmlspecialchars($silla['id_silla']); ?></td>
                             <td><?php echo htmlspecialchars($silla['estado_silla']); ?></td>
                             <td>
-                                <a href="editarSilla.php?id_silla=<?php echo $silla['id_silla']; ?>&id_mesa=<?php echo $id_mesa; ?>" 
+                                <a href="../php/editarSilla.php?id_silla=<?php echo $silla['id_silla']; ?>&id_mesa=<?php echo $id_mesa; ?>" 
                                    class="btn btn-warning btn-sm">
                                     <i class="fas fa-edit"></i>
                                 </a>
